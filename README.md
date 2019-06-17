@@ -38,30 +38,3 @@ base64ToFile(base64).then(file => {
   file // 文件对象 new File()
 })
 ```
-
-## 图片处理
-
-传入图片对象或 base64 进行：图片质量调整，图片缩放，图片裁剪
-
-```
-import { pictureProcessing } from '@dyb881/file';
-
-const image = File/base64;
-
-// 快捷调整图片质量为 0.1
-pictureProcessing(image, 0.1).then(base64 => {
-  base64 // 处理后的图片
-});
-
-// 使用参数调整
-pictureProcessing(image, {
-  quality?: 0.3; // 图片质量调整为 0.3
-  x?: number; // 裁剪起点
-  y?: number; // 裁剪起点
-  width?: number; // 裁剪尺寸
-  height?: number; // 裁剪尺寸
-  zoom?: 0.8; // 缩放为 80%
-}).then(base64 => {
-  base64 // 处理后的图片
-});
-```

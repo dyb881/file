@@ -16,7 +16,7 @@ export const getFile = (props?: HTMLInputElement['attributes']): Promise<FileLis
   new Promise((resolve, reject) => {
     if (!input) {
       input = document.createElement('input');
-      window.document.body.appendChild(input);
+      document.body.appendChild(input);
     }
     Object.assign(input, {
       accept: 'image/*',
@@ -70,31 +70,4 @@ export const base64ToFile = async (base64: string, fileName = 'file') => {
   return new File([u8arr], `${fileName}.${ext}`, {
     type,
   });
-};
-
-/**
- * 图片处理配置
- */
-interface ICropConfig {
-  quality?: number; // 图片质量
-  x?: number; // 裁剪起点
-  y?: number; // 裁剪起点
-  width?: number; // 裁剪尺寸
-  height?: number; // 裁剪尺寸
-  zoom?: number; // 缩放
-}
-
-/**
- * 图片处理
- * 当配置 quality 图片质量，图片将自动转为 jpg 格式
- */
-export const pictureProcessing = async (image: File | string, config: number | ICropConfig) => {
-  const base64 = image instanceof File ? await fileToBase64(image) : image;
-  const img = await getImg(base64);
-  if (typeof config === 'number') config = { quality: config };
-  const { quality, x = 0, y = 0, width = img.width, height = img.height, zoom = 1 } = config;
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d')!;
-  ctx.drawImage(img, x, y, width, height, 0, 0, (canvas.width = width * zoom), (canvas.height = height * zoom));
-  return canvas.toDataURL(quality ? base64.split(',')[0].slice(5, -7) : 'image/jpeg', quality);
 };
