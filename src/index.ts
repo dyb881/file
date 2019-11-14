@@ -19,7 +19,7 @@ export const getFile = (props?: HTMLInputElement['attributes']): Promise<FileLis
       document.body.appendChild(input);
     }
     Object.assign(input, {
-      accept: 'image/*',
+      accept: accepts.image,
       multiple: false,
       ...props,
       onchange: () => resolve(input.files!),
