@@ -45,6 +45,22 @@ export const getImg = (src: string): Promise<HTMLImageElement> =>
   });
 
 /**
+ * img 标签转 base64
+ */
+export const imgToBase64 = (img: HTMLImageElement) =>
+  new Promise(resolve => {
+    img.onload = () => {
+      const { width, height } = img;
+      const canvas = document.createElement('canvas');
+      Object.assign(canvas, { width, height });
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      const dataURL = canvas.toDataURL('image/png');
+      resolve(dataURL);
+    };
+  });
+
+/**
  * 文件转Base64
  */
 export const fileToBase64 = (file: File): Promise<string> =>
