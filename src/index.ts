@@ -54,7 +54,7 @@ export const imgToBase64 = (img: HTMLImageElement) =>
       const canvas = document.createElement('canvas');
       Object.assign(canvas, { width, height });
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, width, height);
+      ctx!.drawImage(img, 0, 0, width, height);
       const dataURL = canvas.toDataURL('image/png');
       resolve(dataURL);
     };
