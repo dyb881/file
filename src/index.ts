@@ -12,7 +12,7 @@ export const accepts = {
 /**
  * 上传文件
  */
-export const getFile = (props?: HTMLInputElement['attributes']): Promise<FileList> =>
+export const getFile = (props?: any): Promise<FileList> =>
   new Promise((resolve, reject) => {
     if (!input) {
       input = document.createElement('input');
