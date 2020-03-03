@@ -83,7 +83,5 @@ export const base64ToFile = async (base64: string, fileName = 'file') => {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new File([u8arr], `${fileName}.${ext}`, {
-    type,
-  });
+  return new File([u8arr], `${fileName}.${ext}`, { type });
 };
