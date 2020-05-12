@@ -48,7 +48,7 @@ export const getImg = (src: string): Promise<HTMLImageElement> =>
  * img 标签转 base64
  */
 export const imgToBase64 = (img: HTMLImageElement) =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     img.onload = () => {
       const { width, height } = img;
       const canvas = document.createElement('canvas');
@@ -64,7 +64,7 @@ export const imgToBase64 = (img: HTMLImageElement) =>
  * 文件转Base64
  */
 export const fileToBase64 = (file: File): Promise<string> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result as string);
     reader.readAsDataURL(file);
