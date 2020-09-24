@@ -75,7 +75,7 @@ export const fileToBase64 = (file: File): Promise<string> =>
  */
 export const base64ToBlob = (base64: string) => {
   const arr = base64.split(',');
-  const type = arr[0].match(/:(.*?);/) && arr[0].match(/:(.*?);/)[1];
+  const type = (arr[0].match(/:(.*?);/) || [])[1];
   const bstr = atob(arr[1]);
   let n = bstr.length;
   let u8arr = new Uint8Array(n);
