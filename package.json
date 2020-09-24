@@ -1,6 +1,6 @@
 {
   "name": "@dyb881/file",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "description": "文件处理工具，获取上传文件，文件转base64，base64转文件，图片裁剪压缩等",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
