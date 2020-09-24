@@ -71,17 +71,36 @@ export const fileToBase64 = (file: File): Promise<string> =>
   });
 
 /**
- * Base64转文件
+ * base64 转 blob
  */
-export const base64ToFile = async (base64: string, fileName = 'file') => {
-  const data = base64.split(',');
-  const type = data[0].slice(5, -7);
-  const ext = type.split('/')[1];
-  const bstr = atob(data[1]);
+export const base64ToBlob = (base64: string) => {
+  const arr = base64.split(',');
+  const type = arr[0].match(/:(.*?);/)?.[1];
+  const bstr = atob(arr[1]);
   let n = bstr.length;
-  const u8arr = new Uint8Array(n);
+  let u8arr = new Uint8Array(n);
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new File([u8arr], `${fileName}.${ext}`, { type });
+  return new Blob([u8arr], { type });
+};
+
+/**
+ * blob 转 文件
+ */
+export const blobToFile = (blob: Blob, fileName: string) => {
+  const file: any = blob;
+  file.lastModifiedDate = new Date();
+  file.name = fileName;
+  return file as File;
+};
+
+/**
+ * base64 转 文件
+ */
+export const base64ToFile = (base64: string, fileName = 'file') => {
+  const blob = base64ToBlob(base64);
+  const ext = blob.type.split('/')[1];
+  const file = blobToFile(blob, `${fileName}.${ext}`);
+  return file;
 };
