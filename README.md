@@ -1,3 +1,5 @@
+# ！！已经停止更新，并迁移到 [Seasoning](https://dyb881.github.io/seasoning/common/tools/file-tool)
+
 # file
 
 文件处理工具，获取上传文件，文件转 base64，base64 转文件
